@@ -1,0 +1,60 @@
+Vou manter as 1.200 casas e as quatro colunas, tratando todas como imóveis de Vale do Sol. Recalcularei apenas o preço com uma regra local estável e um desvio aleatório, positivo ou negativo, cuja magnitude fique entre R$ 10 mil e R$ 35 mil; depois validarei também o erro obtido pelo modelo no conjunto de teste.
+
+
+A calibração ficou dentro do objetivo gerador: ruído aplicado de R$ 10.039,66 a R$ 34.994,52, com média de R$ 22.370,89. No teste, o modelo apresenta MAE de aproximadamente R$ 22,7 mil e RMSE de R$ 24,1 mil. O \(R^2\) sobe para cerca de 94%, consequência matemática inevitável de limitar o erro a no máximo R$ 35 mil numa faixa de preços de aproximadamente R$ 299 mil a R$ 771 mil. Vou gravar essa versão.
+
+
+Perfeito. Assumiremos que todos os imóveis pertencem à cidade fictícia Vale do Sol, sem adicionar a coluna cidade.
+Isso permite reduzir bastante a variação geográfica oculta e calibrar a base para:
+MAE próximo de R$ 45 mil;
+RMSE aproximado de R$ 55–65 mil;
+faixa de 95% próxima de ±R$ 110 mil;
+preços ainda imperfeitos, mas adequados ao estudo;
+tamanho, idade e bairro mantendo influências coerentes.
+
+Ruído aplicado: R$ 10.039,66–R$ 34.994,52.
+Ruído médio: R$ 22.370,89.
+MAE em teste: R$ 22.703,12.
+RMSE: R$ 24.080,92.
+\(R^2\) em teste: 94,25%.
+1.200 registros validados, sem linhas duplicadas.
+
+
+o que voce acho desta base agora?
+
+
+-----------------------------------------------------------
+
+
+A base base-casas.csv representa o mercado imobiliário da cidade fictícia Vale do Sol. Ela foi criada para estudar regressão linear com dados suficientemente previsíveis, mas sem transformar os preços em resultados matematicamente perfeitos. Ao todo, existem 1.200 imóveis descritos por tamanho, idade, bairro e preço.
+
+A lógica de negócio é simples: imóveis maiores tendem a valer mais, imóveis antigos sofrem uma pequena desvalorização e propriedades localizadas na Praia recebem uma valorização moderada em comparação com o Centro. Cada metro quadrado acrescenta aproximadamente R$ 4.200 ao valor, cada ano reduz cerca de R$ 1.200 e a Praia adiciona por volta de R$ 25 mil.
+
+Para representar aspectos não informados — como conservação, acabamento, negociação e localização exata — cada preço recebeu uma variação aleatória positiva ou negativa entre R$ 10 mil e R$ 35 mil. Dessa forma, duas casas parecidas podem apresentar preços diferentes, como normalmente ocorre no mercado.
+
+Tecnicamente, a base não possui valores ausentes nem linhas integralmente duplicadas. O bairro pode ser transformado por one-hot encoding, enquanto tamanho e idade podem ser normalizados antes do treinamento. O preço está registrado em reais e será o alvo do modelo supervisionado.
+
+Nos testes, a regressão apresentou erro médio de aproximadamente R$ 22,7 mil e explicou 94,25% da variação dos preços. Esse resultado é alto porque a base foi construída para fins educacionais e possui relações controladas. Portanto, ela é adequada para aprender treinamento, gradientes, métricas e inferência, mas não deve ser utilizada para avaliar imóveis reais.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
